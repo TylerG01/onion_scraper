@@ -8,8 +8,7 @@ The goal of this project is to create a local relational database of verified ac
 **Database & Tables**
 The Database and Table structure is designed to emulate the Medallion Architecture which is frequently employed in enterprise environments to create reliable and organized data. Each table name is reflective of the quality and refinement of the data within:
 
-![Onion_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/f18411ef-5255-481c-adc0-99803f2d38b4)
-
+![Onion_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/0576fc09-1b24-48ee-90d8-31a0f176bb70)
 
 - **Raw Data**: Data here obtained through the process of "seeding". Prior to sending a ping request through the Tor network to each address, redundancies (address & search phrase pairs) are removed.
 - **Bronze**: Addresses in this table have been verified as active through a SOCKS request through the Tor network, and given a time stamp of the successful connection. 
