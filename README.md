@@ -3,8 +3,14 @@ While very impressive projects, the vast majority of .onion V3 addresses found o
 
 The goal of this project is to create a local relational database of verified active .onion v3 addresses which can be used for future research projects in image & content classification, as well as analyzing Tor traffic from index ("seeding") through to the end point host. 
 
+
+
 **Database & Tables**
 The Database and Table structure is designed to emulate the Medallion Architecture which is frequently employed in enterprise environments to create reliable and organized data. Each table name is reflective of the quality and refinement of the data within:
+
+![Onion_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/f18411ef-5255-481c-adc0-99803f2d38b4)
+
+
 - **Raw Data**: Data here obtained through the process of "seeding". Prior to sending a ping request through the Tor network to each address, redundancies (address & search phrase pairs) are removed.
 - **Bronze**: Addresses in this table have been verified as active through a SOCKS request through the Tor network, and given a time stamp of the successful connection. 
 - **Silver:** Addresses which have content that can be freely accessed without a password. Building upon the columns from the previous table, the Silver table will include a yes/no value indicating whether or not the site has images presents as well as external links, a value for the service type and the site's top 5 most common words.
