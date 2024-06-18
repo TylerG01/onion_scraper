@@ -16,6 +16,7 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 ![Onion_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/0576fc09-1b24-48ee-90d8-31a0f176bb70)
 
 **Main:** As the central component of the project, this defines the SOCKS proxy configuration and creates a global requests session within. It then runs the other modules to populate tables in the SQL database and refines it. 
+
 **db_connection:** A duct-tape solution for storing user, password, host and database values used by the other modules. This module will be removed in favor of setting environment variables in the near future. 
 1. **db_construction:** Creates the database and table structured outlined above.
 2. **seeder.py:** When executed, this module utilizes a list of user defined keywords and phrases to build a structured search queries within specified clear net index sites. Samples included: "bitcoin", "gift cards", "crypto", "untraceable", "phone", "email".
