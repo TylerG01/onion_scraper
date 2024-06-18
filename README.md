@@ -1,5 +1,5 @@
 ## Readme
-While very impressive projects, the vast majority of .onion V3 addresses found on index sites are either inactive or labeled with incorrect meta, due to thee privacy, ease of set up and self-hosting, and variation addresses available. 
+While very impressive projects, the vast majority of .onion V3 addresses found on index sites are either inactive or labeled with incorrect meta, due to the privacy, ease of set up and self-hosting, and variation addresses available. 
 
 The goal of this project is to create a local relational database of verified active .onion v3 addresses which can be used for future research projects in image & content classification, as well as analyzing Tor traffic from index ("seeding") through to the end point host. 
 
