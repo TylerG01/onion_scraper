@@ -31,7 +31,7 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 6. **(Future Development) to_gold.py:** The final module in the enrichment process (for now), to_gold.py will iterate through each row in the ‘Silver’ table featuring a “True” status in the ‘external links’ column. If external links are in-fact present within the service in question, this module will copy the row to the ‘Gold’ table then scrape through the site to add up to 50 external discoverable links. Each of these links will be listed in it’s own column within the source address’ row, then copied back to the ‘raw’ table, where they will undergo the process again.
 
 ### Upcoming Features
-Once the workflow is fully functional, conditional parallel processing will be added to the onion_scraper.py(main script) to enable the it’s ability to run multiple phases of the work-flow in tandem.  
+Once the workflow is fully functional, conditional parallel processing will be added to the onion_scraper.py(main script) to enable the ability to run multiple phases of the work-flow in tandem.  
 
 Additionally, each script in the continuous workflow process (listed as 1 - 6 above) will undergo performance benchmarking to weigh the benefits of multi-threading. 
 
