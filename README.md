@@ -1,11 +1,15 @@
 ## Readme
 While very impressive projects, the vast majority of .onion V3 addresses found on index sites are either inactive or labeled with incorrect meta, due to the privacy, ease of set up and self-hosting, and variation addresses available. 
 
-The goal of this project is to create a local relational database of verified active .onion v3 addresses which can be used for future research projects in image & content classification, as well as analyzing Tor traffic from index ("seeding") through to the end point host. 
+The goal of this project is to create a local relational database of verified active .onion v3 addresses which can be used for future research projects in image & content classification, as well as analyzing Tor traffic from index ("seeding") through to the end point host. While future development will include parallel processing and multi-threading (both) capabilities, this project is designed to run on a Raspberry Pi 4. 
 
 
+### Underlying Technologies
+- Request through the TOR Nework via SOCKS proxy client (socks5h).
+- BeautifulSoup4 for much of the core scraping functionality.
+- MariaDB Server and MySQL commands for local database and table creation.
 
-**Database & Tables**
+### Database & Tables
 The Database and Table structure is designed to emulate the Medallion Architecture which is frequently employed in enterprise environments to create reliable and organized data. Each table name is reflective of the quality and refinement of the data within:
 - **Raw Data**: Data here obtained through the process of "seeding". Prior to sending a ping request through the Tor network to each address, redundancies (address & search phrase pairs) are removed.
 - **Bronze**: Addresses in this table have been verified as active through a SOCKS request through the Tor network, and given a time stamp of the successful connection. 
