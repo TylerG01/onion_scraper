@@ -17,7 +17,8 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 - **Gold:** Building on the Silver table, the Gold table will include columns for up to 50 links pointing to external .onion addresses. 
 
 ### Workflow & Module Descriptions
-![Onion_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/d6d43f12-c9ca-4622-806a-9574842d566d)
+![Onions_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/7d6d2e44-b3d3-447f-b534-a005be589c35)
+
 
 **onion_sracper(main script):** As the central component of the project, this defines the SOCKS proxy configuration and creates a global requests session within. It then runs the other modules to populate tables in the SQL database and refines it. With this said, each module was built with the ability to run an interdependent script. This is a design consideration for future phases of the project. 
 
