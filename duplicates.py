@@ -2,6 +2,7 @@ import mariadb
 from db_connection import DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE
 
 def remove_duplicate_rows():
+    total_deleted = 0
     try:
         # Connect to your MariaDB database
         db_connection = mariadb.connect(
@@ -41,6 +42,7 @@ def remove_duplicate_rows():
                 
                 if deleted_count > 0:
                     print(f"Deleted {deleted_count} row(s) for duplicate link '{link}'")
+                    total_deleted += deleted_count  # Increment total deleted count
                     rows_deleted = True  # Set flag to True if rows were deleted
 
             # Commit changes to the database
@@ -51,6 +53,7 @@ def remove_duplicate_rows():
                 break
 
         print("No more duplicates to delete. Script completed.")
+        print(f"Total number of items deleted: {total_deleted}")
 
     except mariadb.Error as error:
         print(f"Error: {error}")
