@@ -51,10 +51,8 @@ def fetch_and_process_urls(connection, session):
         # Process each URL using provided session
         for (url, phrase) in rows:
             process_urls_and_insert(connection, session, url, phrase)
-
     except mariadb.Error as e:
         print(f"Error accessing database: {str(e)}")
-
     finally:
         cursor.close()
 
@@ -67,9 +65,7 @@ def main(session):
             host=DB_HOST,
             database=DB_DATABASE
         )
-        
         fetch_and_process_urls(db_connection, session)
-
     except mariadb.Error as e:
         print(f"Error connecting to MariaDB: {str(e)}")
     # Close database connection
