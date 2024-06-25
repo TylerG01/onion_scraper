@@ -19,7 +19,7 @@ def configure_socks_proxy():
 def run_modules_in_order(session):
     db_construction.main()
     seeder.main()
-    duplicates.remove_duplicate_rows()
+    duplicates.delete_duplicate_rows()
     onion_ping_v2.main(session)
 
 if __name__ == "__main__":
