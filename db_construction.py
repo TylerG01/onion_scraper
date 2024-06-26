@@ -21,7 +21,8 @@ CREATE TABLE IF NOT EXISTS bronze (
     phrase VARCHAR(255),
     status VARCHAR(255),
     time TIMESTAMP,
-    data VARCHAR(255),
+    images TEXT,
+    Ext_Links TEXT,
     FOREIGN KEY (raw_id) REFERENCES raw(id)
 );
 """
@@ -34,9 +35,13 @@ CREATE TABLE IF NOT EXISTS silver (
     phrase VARCHAR(255),
     status VARCHAR(255),
     time TIMESTAMP,
-    refined_data VARCHAR(255),
     images TEXT,
     Ext_Links TEXT,
+    Service_Type VARCHAR(255),
+    common_word_1 VARCHAR(255),
+    common_word_2 VARCHAR(255),
+    common_word_3 VARCHAR(255),
+    common_word_4 VARCHAR(255),
     FOREIGN KEY (bronze_id) REFERENCES bronze(id)
 );
 """
@@ -51,7 +56,6 @@ CREATE TABLE IF NOT EXISTS gold (
     phrase VARCHAR(255),
     status VARCHAR(255),
     time TIMESTAMP,
-    final_data VARCHAR(255),
     images TEXT,
     Ext_Links TEXT,
     Service_Type VARCHAR(255),
