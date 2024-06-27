@@ -3,6 +3,7 @@ import db_construction
 import seeder
 import duplicates
 import onion_ping_v2
+import content_check
 
 def configure_socks_proxy():
     socks_proxy = 'socks5h://127.0.0.1:9050'
@@ -21,6 +22,7 @@ def run_modules_in_order(session):
     seeder.main()
     duplicates.delete_duplicate_rows()
     onion_ping_v2.main(session)
+    content_check.main(session)
 
 if __name__ == "__main__":
     session = configure_socks_proxy()
