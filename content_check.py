@@ -19,12 +19,12 @@ def connect_to_db():
 
 def fetch_links(conn):
     cursor = conn.cursor()
-    cursor.execute("SELECT id, link FROM bronze")
+    cursor.execute("SELECT id, link FROM bronze WHERE images IS NULL OR Ext_Links IS NULL")
     return cursor.fetchall()
 
 def count_rows(conn):
     cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(*) FROM bronze")
+    cursor.execute("SELECT COUNT(*) FROM bronze WHERE images IS NULL OR Ext_Links IS NULL")
     return cursor.fetchone()[0]
 
 def check_site(url, session=None):
@@ -75,7 +75,7 @@ def main(session=None):
             pbar.update(1)
 
     conn.close()
-    print("Finished checking URL's in bronze table for images and external links!")
+    print("Finished checking URLs in bronze table for images and external links!")
 
 if __name__ == "__main__":
     session = requests.Session()
