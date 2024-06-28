@@ -38,17 +38,23 @@ def delete_duplicate_rows():
             HAVING COUNT(*) > 1
         ) t2 ON t1.link = t2.link AND t1.id > t2.min_id;
         """
+
         # Start the spinner
         spinner = Spinner('Processing... ')
         cursor.execute(delete_query)
         spinner.next()
+
+        # Get the number of deleted rows
+        deleted_rows = cursor.rowcount
+
+        # Commit changes
         conn.commit()
 
         # Stop the spinner
         spinner.finish()
 
         # Print number of deleted rows
-        print(f"Deleted {cursor.rowcount} rows.")
+        print(f"Deleted {deleted_rows} rows.")
 
     except mariadb.Error as err:
         print(f"Error: {err}")
@@ -58,6 +64,7 @@ def delete_duplicate_rows():
         if 'cursor' in locals():
             cursor.close()
         conn.close()
+        print("MariaDB connection closed.")
 
 if __name__ == "__main__":
     delete_duplicate_rows()
