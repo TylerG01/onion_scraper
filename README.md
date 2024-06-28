@@ -18,11 +18,11 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 
 ### Workflow & Module Descriptions
 ![Onion Scraper Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/023440e5-527e-4c9a-992d-f5e55d21191f)
-
+### Administrative Scripts
 **onion_sracper(main script):** As the central component of the project, this defines the SOCKS proxy configuration and creates a global requests session within. It then runs the other modules to populate tables in the SQL database and refines it. With this said, each module was built with the ability to run an interdependent script. This is a design consideration for future phases of the project. 
 
 **db_connection:** A duct-tape solution for storing user, password, host and database values used by the other modules. This module will be removed in favor of setting environment variables in the near future. 
-
+### Workflow Processes
 1. **db_construction:** Creates the database and table structure outlined above. The database and it's tables utilize Foreign Keys to enforce data integrity.
 2. **seeder.py:** When executed, this module utilizes a list of user defined keywords and phrases to build a structured search queries within specified clear net index sites. Samples included: "bitcoin", "gift cards", "crypto", "untraceable", "phone", "email".
 3. **duplicates.py:** Once seeder.py completes its queries, this module uses a ‘while True’ loop to repeatedly execute the comparison & deletion logic until no more duplicates are found within the raw table. 
