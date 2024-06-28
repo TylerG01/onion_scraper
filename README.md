@@ -17,8 +17,7 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 - **Gold:** Building on the Silver table, the Gold table will include columns for up to 50 links pointing to external .onion addresses. 
 
 ### Workflow & Module Descriptions
-![Onions_Scraper_Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/7d6d2e44-b3d3-447f-b534-a005be589c35)
-
+![Onion Scraper Workflow](https://github.com/TylerG01/onion_scraper/assets/133159382/023440e5-527e-4c9a-992d-f5e55d21191f)
 
 **onion_sracper(main script):** As the central component of the project, this defines the SOCKS proxy configuration and creates a global requests session within. It then runs the other modules to populate tables in the SQL database and refines it. With this said, each module was built with the ability to run an interdependent script. This is a design consideration for future phases of the project. 
 
@@ -28,13 +27,14 @@ The Database and Table structure is designed to emulate the Medallion Architectu
 2. **seeder.py:** When executed, this module utilizes a list of user defined keywords and phrases to build a structured search queries within specified clear net index sites. Samples included: "bitcoin", "gift cards", "crypto", "untraceable", "phone", "email".
 3. **duplicates.py:** Once seeder.py completes its queries, this module uses a ‘while True’ loop to repeatedly execute the comparison & deletion logic until no more duplicates are found within the raw table. 
 4. **onion_ping:** Accepts a requests.Session object (session) as an argument and uses it to make HTTPS requests through the Tor network to check the status of addresses in the “seed” table. If an address returns a 200 status, it’s moved to the “bronze” table with a timestamp where futher refining will be conducted.
-5. **(In Revision) content_check.py:** This module iterates through each address in the bronze table and begins to enrich the rows with identifying information. This includes True/False values indicating whether or not each address features images and external links, and collects to the top 5 most common words present on the site. If ‘True’ value is written to ‘images’ or ‘external links’ column, the row is copied to the ‘Silver’ table.
-6. **(Future Development) to_gold.py:** The final module in the enrichment process (for now), to_gold.py will iterate through each row in the ‘Silver’ table featuring a “True” status in the ‘external links’ column. If external links are in-fact present within the service in question, this module will copy the row to the ‘Gold’ table then scrape through the site to add up to 50 external discoverable links. Each of these links will be listed in it’s own column within the source address’ row, then copied back to the ‘raw’ table, where they will undergo the process again.
+ **content_check.py:** This module iterates through each address in the bronze table and begins to enrich the rows with identifying information. This includes binary values indicating whether or not each address features images and external links.
+6. **b2s.py:** Bronze to Silver (b2s) is simply searches the bronze table for the binary value of 1 within either the 'images' or 'Ext_Links' columns. If either columns within the same row contain a true value, then entire row is moved to the silver database. The final version of this project will execute this module periodically.
+7. **common_words.py:** This module was created to parse target URL's using Beautiful Soup to extract all text, clean and tokenize the text to focus on descriptive words, then analyze the frequency of the descriptive words to find the top 5 most common to each site. The top 5 words selected appear in descending order, starting from most frequent within the 'common_word_1' column of the silver table.
 
 ### Upcoming Features
 Once the workflow is fully functional, conditional parallel processing will be added to the onion_scraper.py(main script) to enable the ability to run multiple phases of the work-flow in tandem.  
 
-Additionally, each script in the continuous workflow process (listed as 1 - 6 above) will undergo performance benchmarking to weigh the benefits of multi-threading. 
+Additionally, each script in the continuous workflow process (listed as 1 - 7 above) will undergo performance benchmarking to weigh the benefits of multi-threading. 
 
 
 
