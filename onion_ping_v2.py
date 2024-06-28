@@ -19,7 +19,7 @@ def process_urls_and_insert(connection, session, url, phrase):
             cursor.execute(insert_query, data)
             connection.commit()
             cursor.close()
-            print(f"Inserted URL {url} into bronze table")
+            # print(f"Inserted URL {url} into bronze table")
         
         else:
             update_query = "UPDATE raw SET status = %s WHERE link = %s"
@@ -27,7 +27,7 @@ def process_urls_and_insert(connection, session, url, phrase):
             cursor.execute(update_query, (408, url))
             connection.commit()
             cursor.close()
-            print(f"Updated status for URL {url} in raw to 408")
+            # print(f"Updated status for URL {url} in raw to 408")
     
     # Update status to 408 (Request Timeout) in raw for failed URL
     except RequestException as e:
@@ -36,7 +36,7 @@ def process_urls_and_insert(connection, session, url, phrase):
         cursor.execute(update_query, (408, url))
         connection.commit()
         cursor.close()
-        print(f"Error fetching URL {url}: {str(e)}")
+        # print(f"Error fetching URL {url}: {str(e)}")
 
 # Function to fetch URLs and process them with progress bar
 def fetch_and_process_urls(connection, session):
