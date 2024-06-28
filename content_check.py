@@ -75,7 +75,7 @@ def main(session=None):
             pbar.update(1)
 
     conn.close()
-    print("Finished executing the script.")
+    print("Finished checking URL's in bronze table for images and external links!")
 
 if __name__ == "__main__":
     session = requests.Session()
