@@ -12,7 +12,7 @@ def main():
     current_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     # Define the path to the words_list.txt file
-    file_path = '/absolute/path/to/words.txt'/words_list.txt'
+    file_path = '/absolute/path/to/your/words_list.txt'
     with open(file_path, 'r') as file:
         user_list = [line.strip() for line in file if line.strip()]
 
