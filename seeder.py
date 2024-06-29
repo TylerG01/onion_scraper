@@ -11,9 +11,11 @@ def main():
     start_time = time.time()
     current_datetime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    user_list = ["bitcoin", "gift cards", "crypto", "untraceable", "phone", "email"]
+    # Define the path to the words_list.txt file
+    file_path = '/absolute/path/to/words.txt'/words_list.txt'
+    with open(file_path, 'r') as file:
+        user_list = [line.strip() for line in file if line.strip()]
 
-    # Establish database db_connection
     try:
         db_connection = mariadb.connect(
             user=DB_USER,
@@ -32,18 +34,13 @@ def main():
             
             target_url = "https://ahmia.fi/search/?q=" + item_formatted
             print(target_url)
-            # Send a GET request to the target URL
             response = requests.get(target_url)
             soup = BeautifulSoup(response.text, 'html.parser')
-            # Find all the anchor tags (links) on the page
             anchor_tags = soup.find_all('a')
-            # Create a list to save the URLs
             url_list = [tag.get('href') for tag in anchor_tags if tag.get('href')]
-            # Remove URLs that don't match the pattern \w+\.onion using regular expressions
             onion_pattern = re.compile(r'\w+\.onion')
             url_list = [re.search(onion_pattern, url).group() for url in url_list if re.search(onion_pattern, url)]
 
-            # Insert the URLs into the database
             for url in url_list:
                 insert_query = "INSERT INTO raw (link, phrase, status) VALUES (?, ?, ?)"
                 insert_values = (url, item, 'unknown')
@@ -70,3 +67,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
